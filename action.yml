@@ -87,7 +87,7 @@ runs:
           query = f"pylint-{numeric_score}-{badge_color}?logo=python&logoColor=white"
           badge_url = f"https://img.shields.io/badge/{query}"
           
-          result = re.sub(r"(?<=!\[pylint]\()(.+?)(?=\))", badge_url, content)
+          result = re.sub(r"(?<=!\[pylint]\()(.*?)(?=\))", badge_url, content)
           with open("README.md", "w", encoding="utf8") as f:
               f.write(result)
     -
