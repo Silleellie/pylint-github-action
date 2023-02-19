@@ -1,0 +1,105 @@
+name: "PyLint package"
+description: "Perform pylint check on one or multiple packages and update badge in README"
+branding:
+  icon: edit-3
+  color: yellow
+inputs:
+  package-path:
+    description: "The path relative to the root of the repo of the package(s) to lint"
+    required: true
+  requirement-path:
+    description: "The path relative to the root of the repo of the requirements to install"
+    default: requirements.txt
+    required: false
+  python-version:
+    description: "Python version which will install all dependencies and lint package(s)"
+    default: 3.9
+
+runs:
+  using: "composite"
+
+  steps:
+    -
+      name: "Check if PR"
+      uses: 8BitJonny/gh-get-current-pr@2.2.0
+      id: PR
+    -
+      name: "Determine REF"
+      uses: haya14busa/action-cond@v1
+      id: ref
+      with:
+        cond: ${{ steps.PR.outputs.pr_found == 'true' }}
+        if_true: ${{ github.event.pull_request.head.ref }}
+        if_false: ''
+    -
+      name: "Checkout Repository"
+      uses: actions/checkout@v3
+      if:
+      with:
+        ref: ${{ steps.ref.outputs.value }}
+    -
+      name: "Setup python"
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ github.event.inputs.python-version }}
+    -
+      name: "Setup installation requirements"
+      run: |
+        pip install --upgrade pip
+        pip install wheel
+        pip install -r ${{ github.event.inputs.requirement-path }}
+      shell: bash
+    -
+      name: "Linting both src and app packages"
+      run: |
+        pylint --output-format=text:pylint_score.txt,colorized ${{ github.event.inputs.package-path }}
+      shell: bash
+    -
+      name: "Get numeric pylint score and badge color"
+      id: parameters-badge
+      uses: jannekem/run-python-script-action@v1
+      with:
+        script: |
+          import re
+          import os
+          with open("pylint_score.txt", "r") as f:
+              pylint_result = f.read()
+          numeric_score = re.search(r"(?<=\s)(\d+\.\d+)\/\d+(?=\s)", pylint_result).group().split("/")[0]
+          
+          if 0 <= float(numeric_score) < 5:
+              color = "red"
+          elif 5 < float(numeric_score) < 8:
+              color = "orange"
+          elif 8 < float(numeric_score) < 10:
+              color = "yellow"
+          elif float(numeric_score) == 10:
+              color = "brightgreen"
+          
+          os.system("echo badge_color=" + color + " >> $GITHUB_OUTPUT")
+          os.system("echo pylint_score=" + numeric_score + " >> $GITHUB_OUTPUT")
+    -
+      name: "Create badge and substitute it in README.md"
+      uses: jannekem/run-python-script-action@v1
+      with:
+        script: |
+          import re
+          with open("README.md", "r", encoding="utf8") as f:
+              content = f.read()
+          
+          numeric_score = "${{ steps.parameters-badge.outputs.pylint_score }}"
+          badge_color = "${{ steps.parameters-badge.outputs.badge_color }}"
+          
+          query = f"pylint-{numeric_score}-{badge_color}?logo=python&logoColor=white"
+          badge_url = f"https://img.shields.io/badge/{query}"
+          
+          result = re.sub(r"(?<=\[!\[pylint]\()(.+)(?=\)])", badge_url, content)
+          with open("README.md", "w", encoding="utf8") as f:
+              f.write(result)
+    -
+      name: "Push README with changed badge to origin"
+      uses: EndBug/add-and-commit@v9
+      with:
+        add: 'README.md'
+        default_author: github_actions
+        message: 'Updated pylint badge'
+        push: 'true'
