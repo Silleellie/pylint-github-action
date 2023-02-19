@@ -42,7 +42,7 @@ runs:
       name: "Setup installation requirements"
       run: |
         pip install --upgrade pip
-        pip install wheel
+        pip install wheel pylint
         pip install -r ${{ inputs.requirement-path }}
       shell: bash
     -
