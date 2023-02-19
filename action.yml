@@ -78,12 +78,18 @@ runs:
           os.system("echo badge_color=" + color + " >> $GITHUB_OUTPUT")
           os.system("echo pylint_score=" + numeric_score + " >> $GITHUB_OUTPUT")
     -
+     name: "Set README path as environment variable"
+     run: |
+       echo "README_PATH: ${{inputs.readme-path}}"
+     shell: bash
+    -
       name: "Create badge and substitute it in README.md"
       uses: jannekem/run-python-script-action@v1
       with:
         script: |
           import re
-          with open({{ inputs.readme-path }}, "r", encoding="utf8") as f:
+          import os
+          with open(os.environ["README_PATH"], "r", encoding="utf8") as f:
               content = f.read()
           
           numeric_score = "${{ steps.parameters-badge.outputs.pylint_score }}"
@@ -93,7 +99,7 @@ runs:
           badge_url = f"https://img.shields.io/badge/{query}"
           
           result = re.sub(r"(?<=!\[pylint]\()(.*?)(?=\))", badge_url, content)
-          with open({{ inputs.readme-path }}, "w", encoding="utf8") as f:
+          with open(os.environ["README_PATH"], "w", encoding="utf8") as f:
               f.write(result)
     -
       name: "Push README with changed badge to origin"
