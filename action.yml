@@ -30,9 +30,9 @@ runs:
     -
       name: "Checkout Repository"
       uses: actions/checkout@v3
-      if:
       with:
         ref: ${{ steps.ref.outputs.value }}
+        fetch-depth: 0
     -
       name: "Setup python"
       uses: actions/setup-python@v4
