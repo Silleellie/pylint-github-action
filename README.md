@@ -1,2 +1,2 @@
 # pylint-github-action
-Github action that lets you easilly lint any python directory of your package!
+GitHub action that lets you easily lint any python directory of your package!
