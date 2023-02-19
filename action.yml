@@ -20,15 +20,11 @@ runs:
 
   steps:
     -
-      name: "Check if PR"
-      uses: 8BitJonny/gh-get-current-pr@2.2.0
-      id: PR
-    -
       name: "Determine REF"
       uses: haya14busa/action-cond@v1
       id: ref
       with:
-        cond: ${{ steps.PR.outputs.pr_found == 'true' }}
+        cond: github.event_name == 'pull_request'
         if_true: ${{ github.event.pull_request.head.ref }}
         if_false: ''
     -
