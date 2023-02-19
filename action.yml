@@ -48,7 +48,7 @@ runs:
     -
       name: "Linting both src and app packages"
       run: |
-        pylint --output-format=text:pylint_score.txt,colorized ${{ inputs.package-path }}
+        pylint --exit-zero=true --output-format=text:pylint_score.txt,colorized ${{ inputs.package-path }}
       shell: bash
     -
       name: "Get numeric pylint score and badge color"
