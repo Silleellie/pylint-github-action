@@ -13,7 +13,7 @@ inputs:
     required: false
   python-version:
     description: "Python version which will install all dependencies and lint package(s)"
-    default: 3.9
+    default: "3.9"
 
 runs:
   using: "composite"
@@ -32,7 +32,6 @@ runs:
       uses: actions/checkout@v3
       with:
         ref: ${{ steps.ref.outputs.value }}
-        fetch-depth: 0
     -
       name: "Setup python"
       uses: actions/setup-python@v4
@@ -88,7 +87,7 @@ runs:
           query = f"pylint-{numeric_score}-{badge_color}?logo=python&logoColor=white"
           badge_url = f"https://img.shields.io/badge/{query}"
           
-          result = re.sub(r"(?<=\[!\[pylint]\()(.+)(?=\)])", badge_url, content)
+          result = re.sub(r"(?<=!\[pylint]\()(.+?)(?=\))", badge_url, content)
           with open("README.md", "w", encoding="utf8") as f:
               f.write(result)
     -
