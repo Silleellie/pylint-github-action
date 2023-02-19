@@ -57,44 +57,44 @@ runs:
     -
       name: "Get numeric pylint score and badge color"
       id: parameters-badge
-      uses: jannekem/run-python-script-action@v1
-      with:
-        script: |
-          import re
-          import os
-          with open("pylint_score.txt", "r") as f:
-              pylint_result = f.read()
-          numeric_score = re.search(r"(?<=\s)(\d+\.\d+)\/\d+(?=\s)", pylint_result).group().split("/")[0]
-          
-          if 0 <= float(numeric_score) < 5:
-              color = "red"
-          elif 5 < float(numeric_score) < 8:
-              color = "orange"
-          elif 8 < float(numeric_score) < 10:
-              color = "yellow"
-          elif float(numeric_score) == 10:
-              color = "brightgreen"
-          
-          os.system("echo badge_color=" + color + " >> $GITHUB_OUTPUT")
-          os.system("echo pylint_score=" + numeric_score + " >> $GITHUB_OUTPUT")
+      run: |
+        python
+        import re
+        import os
+        with open("pylint_score.txt", "r") as f:
+            pylint_result = f.read()
+        numeric_score = re.search(r"(?<=\s)(\d+\.\d+)\/\d+(?=\s)", pylint_result).group().split("/")[0]
+        
+        if 0 <= float(numeric_score) < 5:
+            color = "red"
+        elif 5 < float(numeric_score) < 8:
+            color = "orange"
+        elif 8 < float(numeric_score) < 10:
+            color = "yellow"
+        elif float(numeric_score) == 10:
+            color = "brightgreen"
+        
+        os.system("echo badge_color=" + color + " >> $GITHUB_OUTPUT")
+        os.system("echo pylint_score=" + numeric_score + " >> $GITHUB_OUTPUT")
+      shell: bash
     -
       name: "Create badge and substitute it in README.md"
-      uses: jannekem/run-python-script-action@v1
-      with:
-        script: |
-          import re
-          with open({{ inputs.readme-path }}, "r", encoding="utf8") as f:
-              content = f.read()
+      run: |
+        python
+        import re
+        with open("{{ inputs.readme-path }}", "r", encoding="utf8") as f:
+            content = f.read()
           
-          numeric_score = "${{ steps.parameters-badge.outputs.pylint_score }}"
-          badge_color = "${{ steps.parameters-badge.outputs.badge_color }}"
+        numeric_score = "${{ steps.parameters-badge.outputs.pylint_score }}"
+        badge_color = "${{ steps.parameters-badge.outputs.badge_color }}"
           
-          query = f"pylint-{numeric_score}-{badge_color}?logo=python&logoColor=white"
-          badge_url = f"https://img.shields.io/badge/{query}"
+        query = f"pylint-{numeric_score}-{badge_color}?logo=python&logoColor=white"
+        badge_url = f"https://img.shields.io/badge/{query}"
           
-          result = re.sub(r"(?<=!\[pylint]\()(.*?)(?=\))", badge_url, content)
-          with open({{ inputs.readme-path }}, "w", encoding="utf8") as f:
-              f.write(result)
+        result = re.sub(r"(?<=!\[pylint]\()(.*?)(?=\))", badge_url, content)
+        with open("{{ inputs.readme-path }}", "w", encoding="utf8") as f:
+            f.write(result)
+      shell: bash
     -
       name: "Push README with changed badge to origin"
       uses: EndBug/add-and-commit@v9
