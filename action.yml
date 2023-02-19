@@ -37,18 +37,18 @@ runs:
       name: "Setup python"
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ github.event.inputs.python-version }}
+        python-version: ${{ inputs.python-version }}
     -
       name: "Setup installation requirements"
       run: |
         pip install --upgrade pip
         pip install wheel
-        pip install -r ${{ github.event.inputs.requirement-path }}
+        pip install -r ${{ inputs.requirement-path }}
       shell: bash
     -
       name: "Linting both src and app packages"
       run: |
-        pylint --output-format=text:pylint_score.txt,colorized ${{ github.event.inputs.package-path }}
+        pylint --output-format=text:pylint_score.txt,colorized ${{ inputs.package-path }}
       shell: bash
     -
       name: "Get numeric pylint score and badge color"
