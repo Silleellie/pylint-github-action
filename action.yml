@@ -9,11 +9,11 @@ inputs:
     required: true
   requirement-path:
     description: "The path relative to the root of the repo of the requirements to install"
-    default: "requirements.txt"
+    default: requirements.txt
     required: false
   readme-path:
     description: "The path relative to the root of the repo of the README.md to update with pylint badge"
-    default: "README.md"
+    default: README.md
     required: false
   python-version:
     description: "Python version which will install all dependencies and lint package(s)"
@@ -78,18 +78,13 @@ runs:
           os.system("echo badge_color=" + color + " >> $GITHUB_OUTPUT")
           os.system("echo pylint_score=" + numeric_score + " >> $GITHUB_OUTPUT")
     -
-     name: "Set README path as environment variable"
-     run: |
-       echo "README_PATH: ${{inputs.readme-path}}"
-     shell: bash
-    -
       name: "Create badge and substitute it in README.md"
       uses: jannekem/run-python-script-action@v1
       with:
         script: |
           import re
           import os
-          with open(os.environ["README_PATH"], "r", encoding="utf8") as f:
+          with open("${{ inputs.readme-path }}", "r", encoding="utf8") as f:
               content = f.read()
           
           numeric_score = "${{ steps.parameters-badge.outputs.pylint_score }}"
@@ -99,7 +94,7 @@ runs:
           badge_url = f"https://img.shields.io/badge/{query}"
           
           result = re.sub(r"(?<=!\[pylint]\()(.*?)(?=\))", badge_url, content)
-          with open(os.environ["README_PATH"], "w", encoding="utf8") as f:
+          with open("${{ inputs.readme-path }}", "w", encoding="utf8") as f:
               f.write(result)
     -
       name: "Push README with changed badge to origin"
