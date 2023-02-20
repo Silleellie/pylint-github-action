@@ -15,7 +15,7 @@ inputs:
     default: requirements.txt
     required: false
   readme-path:
-    description: "The path, relative to the root of the repo, of the README.md to update with pylint badge"
+    description: "The path, relative to the root of the repo, of the README.md to update with the pylint badge"
     default: README.md
     required: false
 
@@ -46,9 +46,10 @@ runs:
         pip install -r ${{ inputs.requirement-path }}
       shell: bash
     -
-      name: "Linting both src and app packages"
+      name: "Lint package(s)"
       run: |
-        pylint --exit-zero --output-format=text:pylint_score.txt,colorized ${{ inputs.package-path }}
+        pkgs_pth=$(python3 -c "import re; print(' '.join(re.findall('([^\s]+)', '{{ inputs.package-path }}')))")
+        pylint --exit-zero --output-format=text:pylint_score.txt,colorized $pkgs_pth
       shell: bash
     -
       name: "Get numeric pylint score and badge color"
