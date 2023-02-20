@@ -1,4 +1,4 @@
-name: "PyLint package"
+name: "PyLint with dynamic badge"
 description: "Perform pylint check on one or multiple packages and update badge in README.md"
 branding:
   icon: edit-3
