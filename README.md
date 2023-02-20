@@ -124,3 +124,11 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
     python-version: 3.11
     readme-path: models/README.md
 ```
+
+## Credits
+
+This is a composite github action which uses the following godly working actions:
+
+* [actions/checkout](https://github.com/actions/checkout)
+* [actions/setup-python](https://github.com/actions/setup-python)
+* [EndBug/add-and-commit](https://github.com/EndBug/add-and-commit)
