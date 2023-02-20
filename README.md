@@ -6,12 +6,14 @@ the obtained score!
 Each time the action is run, packages specified will be linted and a badge in the README.md is updated dynamically
 following one of the below rules:
 
-|        Range PyLint score         |                                            Badge                                             |
-|:---------------------------------:|:--------------------------------------------------------------------------------------------:|
-|     ***PyLint score*** $< 5$      |     ![pylint](https://img.shields.io/badge/pylint-4.73-red?logo=python&logoColor=white)      |
-| $5 \le$ ***PyLint score*** $< 8$  |    ![pylint](https://img.shields.io/badge/pylint-6.32-orange?logo=python&logoColor=white)    |
-| $8 \le$ ***PyLint score*** $< 10$ |    ![pylint](https://img.shields.io/badge/pylint-6.32-yellow?logo=python&logoColor=white)    |
-|     ***PyLint score*** $= 10$     | ![pylint](https://img.shields.io/badge/pylint-10.00-brightgreen?logo=python&logoColor=white) |
+|        Range PyLint score         |                                            Badge                                                                            |
+|:---------------------------------:|:---------------------------------------------------------------------------------------------------------------------------:|
+|     ***PyLint score*** $< 5$      |     ![pylint-red](https://user-images.githubusercontent.com/26851363/220145659-833c833a-bad1-4251-a88f-75bee908ae40.svg)      |
+| $5 \le$ ***PyLint score*** $< 8$  |    ![pylint-orange](https://user-images.githubusercontent.com/26851363/220145963-d4e252e6-c75f-4baf-82ed-b279aba27cfe.svg)    |
+| $8 \le$ ***PyLint score*** $< 10$ |    ![pylint-yellow](https://user-images.githubusercontent.com/26851363/220146291-f7537aa4-2125-4b5c-b020-3edb0b460e27.svg)    |
+|     ***PyLint score*** $= 10$     | ![pylint-green](https://user-images.githubusercontent.com/26851363/220146426-b0250427-0854-402a-9ac8-abe6088a0fdb.svg) |
+
+
 
 
 The action can be triggered by a `PR`, a `PUSH` or manually with `workflow_dispatch`. If the score is changed, the
