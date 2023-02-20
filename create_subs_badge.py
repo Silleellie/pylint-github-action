@@ -15,6 +15,11 @@ with open(README_PATH, "r", encoding="utf8") as f:
 query = f"pylint-{NUMERIC_SCORE}-{BADGE_COLOR}?logo=python&logoColor=white"
 badge_url = f"https://img.shields.io/badge/{query}"
 
-result = re.sub(r"(?<=!\[pylint]\()(.*?)(?=\))", badge_url, content)
+patt = r"(?<=!\[pylint]\()(.*?)(?=\))"
+if re.search(patt, content) is None:
+    raise ValueError("Pylint badge not found! Be sure to put an empty one which acts as a placeholder "
+                     "if this is your first run. Check README.md for examples!")
+
+result = re.sub(patt, badge_url, content)
 with open(README_PATH, "w", encoding="utf8") as f:
     f.write(result)
