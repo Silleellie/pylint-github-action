@@ -6,9 +6,9 @@ with open("pylint_score.txt", "r") as f:
 numeric_score = re.search(r"(?<=\s)(\d+\.\d+)\/\d+(?=\s)", pylint_result).group().split("/")[0]
 
 color = "red"
-if 5 < float(numeric_score) < 8:
+if 5 <= float(numeric_score) < 8:
     color = "orange"
-elif 8 < float(numeric_score) < 10:
+elif 8 <= float(numeric_score) < 10:
     color = "yellow"
 elif float(numeric_score) == 10:
     color = "brightgreen"
