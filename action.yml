@@ -10,7 +10,7 @@ inputs:
   python-version:
     description: "Python version which will install all dependencies and lint package(s)"
     required: true
-  requirement-path:
+  requirements-path:
     description: "The path, relative to the root of the repo, of the requirements to install"
     default: requirements.txt
     required: false
@@ -43,7 +43,7 @@ runs:
       run: |
         pip install --upgrade pip
         pip install wheel pylint
-        pip install -r ${{ inputs.requirement-path }}
+        pip install -r ${{ inputs.requirements-path }}
       shell: bash
     -
       name: "Lint package(s)"
