@@ -53,12 +53,13 @@ runs:
     -
       name: "Get numeric pylint score and badge color"
       id: parameters-badge
-      run: python get_score_color.py
+      run: python ${{ github.action_path }}/get_score_color.py
       shell: bash
     -
       name: "Create badge and substitute it in README.md"
       run: |
-        python create_subs_badge.py ${{ inputs.readme-path }} \
+        python ${{ github.action_path }}/create_subs_badge.py \
+        ${{ inputs.readme-path }} \
         ${{ steps.parameters-badge.outputs.pylint_score }} \
         ${{ steps.parameters-badge.outputs.badge_color }}
       shell: bash
