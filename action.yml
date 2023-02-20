@@ -48,7 +48,7 @@ runs:
     -
       name: "Lint package(s)"
       run: |
-        pkgs_pth=$(python3 -c "import re; print(' '.join(re.findall('([^\s]+)', '${{ toJSON(inputs.package-path) }}')))")
+        pkgs_pth=$(python3 -c 'import re; print(" ".join(re.findall("([^\s]+)", ${{ toJSON(inputs.package-path) }})))')
         pylint --exit-zero --output-format=text:pylint_score.txt,colorized $pkgs_pth
       shell: bash
     -
