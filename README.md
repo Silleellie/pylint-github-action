@@ -6,12 +6,12 @@ to your `README.md` that lets you display the obtained score!
 Each time the action is run, packages specified will be linted and a badge in the `README.md` is updated dynamically
 following one of the below rules:
 
-|              Range PyLint score               |                 Badge                  |
-|:---------------------------------------------:|:--------------------------------------:|
-|      **Bad score**: *PyLint score* $< 5$      |  ![pylint-red](imgs/PyLint-4,73.svg)   |
-|  **Ok score**: $5 \le$ *PyLint score* $< 8$   | ![pylint-orange](imgs/PyLint-6,32.svg) |
-| **Good score**: $8 \le$ *PyLint score* $< 10$ | ![pylint-yellow](imgs/PyLint-8,44.svg) |
-|   **Perfect score**: *PyLint score* $= 10$    |  ![pylint-green](imgs/PyLint-10.svg)   |
+|              Range PyLint score               |                                                          Badge                                                          |
+|:---------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------:|
+|      **Bad score**: *PyLint score* $< 5$      |  ![pylint-red](https://user-images.githubusercontent.com/26851363/220145659-833c833a-bad1-4251-a88f-75bee908ae40.svg)   |
+|  **Ok score**: $5 \le$ *PyLint score* $< 8$   | ![pylint-orange](https://user-images.githubusercontent.com/26851363/220145963-d4e252e6-c75f-4baf-82ed-b279aba27cfe.svg) |
+| **Good score**: $8 \le$ *PyLint score* $< 10$ | ![pylint-yellow](https://user-images.githubusercontent.com/26851363/220146291-f7537aa4-2125-4b5c-b020-3edb0b460e27.svg) |
+|   **Perfect score**: *PyLint score* $= 10$    | ![pylint-green](https://user-images.githubusercontent.com/26851363/220146426-b0250427-0854-402a-9ac8-abe6088a0fdb.svg)  |
 
 
 **NEW:** You can now fully customize the badge color of each of the above ranges! Check [usage](#usage) 
