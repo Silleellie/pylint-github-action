@@ -14,6 +14,10 @@ following one of the below rules:
 |   **Perfect score**: *PyLint score* $= 10$    | ![pylint-green](https://user-images.githubusercontent.com/26851363/220146426-b0250427-0854-402a-9ac8-abe6088a0fdb.svg)  |
 
 
+**NEW:** You can now fully customize the badge color of each of the above ranges! Check [usage](#usage) 
+and [scenario](#scenario) sections for more!
+
+
 The action can be triggered by a **`Pull request`**, a **`Push`** or manually with **`workflow_dispatch`**. 
 If the score is changed, the `github_action` bot will change your badge with an automatic commit
 
@@ -82,6 +86,30 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
     #
     # Optional, Default: README.md
     readme-path: README.md
+
+    # Color of the badge for pylint scores < 5.
+    # Hex, rgb, rgba, hsl, hsla and css named colors can all be used
+    #
+    # Optional, Default: red
+    color-bad-score: red
+
+    # Color of the badge for pylint scores in range [5,8).
+    # Hex, rgb, rgba, hsl, hsla and css named colors can all be used
+    #
+    # Optional, Default: orange
+    color-ok-score: orange
+
+    # Color of the badge for pylint scores in range [8,10).
+    # Hex, rgb, rgba, hsl, hsla and css named colors can all be used
+    #
+    # Optional, Default: yellow
+    color-good-score: yellow
+
+    # Color of the badge for pylint scores == 10.
+    # Hex, rgb, rgba, hsl, hsla and css named colors can all be used
+    #
+    # Optional, Default: brightgreen
+    color-perfect-score: brightgreen
 ```
 
 ## Scenario
@@ -93,6 +121,8 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 * [Mix packages and python files to lint](#mix-packages-and-python-files-to-lint)
 * [Different path for requirements file](#different-path-for-requirements-file)
 * [Different path for README.md file](#different-path-for-readmemd-file)
+* [Change badge color with css named color](#change-badge-color-with-css-named-color)
+* [Change badge color with hex code](#change-badge-color-with-hex-code)
 
 ### Single package to lint
 
@@ -167,6 +197,33 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
     python-version: 3.11
     readme-path: models/README.md
 ```
+
+### Change badge color with css named color
+
+In this case we are extending what we consider a perfect score: all scores in range $[8, 10]$ are considered
+good enough and will have same color (*brightgreen*)
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: src
+    python-version: 3.11
+    color-good-score: brightgreen
+    color-perfect-score: brightgreen
+```
+
+### Change badge color with hex code
+
+In this example we are changing the color for the *bad score range* ($[0,5)$) to purple (hex code: *800080*)
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: src
+    python-version: 3.11
+    color-bad-score: 800080
+```
+
 
 ## Credits
 
