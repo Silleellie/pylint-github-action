@@ -8,14 +8,15 @@ following one of the below rules:
 
 |              Range PyLint score               |                                                          Badge                                                          |
 |:---------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------:|
-|      **Bad score**: *PyLint score* $< 5$      |  ![pylint-red](https://user-images.githubusercontent.com/26851363/220145659-833c833a-bad1-4251-a88f-75bee908ae40.svg)   |
-|  **Ok score**: $5 \le$ *PyLint score* $< 8$   | ![pylint-orange](https://user-images.githubusercontent.com/26851363/220145963-d4e252e6-c75f-4baf-82ed-b279aba27cfe.svg) |
-| **Good score**: $8 \le$ *PyLint score* $< 10$ | ![pylint-yellow](https://user-images.githubusercontent.com/26851363/220146291-f7537aa4-2125-4b5c-b020-3edb0b460e27.svg) |
-|   **Perfect score**: *PyLint score* $= 10$    | ![pylint-green](https://user-images.githubusercontent.com/26851363/220146426-b0250427-0854-402a-9ac8-abe6088a0fdb.svg)  |
+|      **Bad score**: *PyLint score* $< 5$      |  ![PyLint-red](https://github.com/Silleellie/pylint-github-action/assets/26851363/27950618-f456-4fe6-a195-43e2d3f9015e)   |
+|  **Ok score**: $5 \le$ *PyLint score* $< 8$   | ![PyLint-orange](https://github.com/Silleellie/pylint-github-action/assets/26851363/6718c99e-1cc9-4e85-84db-51a1f56d2051) |
+| **Good score**: $8 \le$ *PyLint score* $< 10$ | ![PyLint-yellow](https://github.com/Silleellie/pylint-github-action/assets/26851363/6afe3441-193f-4cc7-8b64-a57110216c34) |
+|   **Perfect score**: *PyLint score* $= 10$    | ![PyLint-10](https://github.com/Silleellie/pylint-github-action/assets/26851363/64fb3a03-c3b9-48ad-8f66-cea41a0ccaf8)  |
 
 
 **NEW:** You can now fully customize the badge color of each of the above ranges! Check [usage](#usage) 
 and [scenario](#scenario) sections for more!
+
 
 
 The action can be triggered by a **`Pull request`**, a **`Push`** or manually with **`workflow_dispatch`**. 
