@@ -6,12 +6,12 @@ to your `README.md` that lets you display the obtained score!
 Each time the action is run, packages specified will be linted and a badge in the `README.md` is updated dynamically
 following one of the below rules:
 
-|              Range PyLint score               |                                                          Badge                                                          |
-|:---------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------:|
+|              Range PyLint score               |                                                           Badge                                                           |
+|:---------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
 |      **Bad score**: *PyLint score* $< 5$      |  ![PyLint-red](https://github.com/Silleellie/pylint-github-action/assets/26851363/27950618-f456-4fe6-a195-43e2d3f9015e)   |
 |  **Ok score**: $5 \le$ *PyLint score* $< 8$   | ![PyLint-orange](https://github.com/Silleellie/pylint-github-action/assets/26851363/6718c99e-1cc9-4e85-84db-51a1f56d2051) |
 | **Good score**: $8 \le$ *PyLint score* $< 10$ | ![PyLint-yellow](https://github.com/Silleellie/pylint-github-action/assets/26851363/6afe3441-193f-4cc7-8b64-a57110216c34) |
-|   **Perfect score**: *PyLint score* $= 10$    | ![PyLint-10](https://github.com/Silleellie/pylint-github-action/assets/26851363/64fb3a03-c3b9-48ad-8f66-cea41a0ccaf8)  |
+|   **Perfect score**: *PyLint score* $= 10$    |   ![PyLint-10](https://github.com/Silleellie/pylint-github-action/assets/26851363/64fb3a03-c3b9-48ad-8f66-cea41a0ccaf8)   |
 
 
 **NEW:** You can now fully customize the badge color of each of the above ranges! Check [usage](#usage) 
