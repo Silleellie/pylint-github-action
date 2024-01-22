@@ -1,11 +1,11 @@
 name: "PyLint with dynamic badge"
-description: "Perform pylint check on one or multiple packages and update badge in README.md"
+description: "Perform pylint check on one or multiple packages/python files and update badge in README.md"
 branding:
   icon: edit-3
   color: yellow
 inputs:
-  package-path:
-    description: "The path, relative to the root of the repo, of the package(s) to lint"
+  lint-path:
+    description: "The path, relative to the root of the repo, of the package(s) or pyton file(s) to lint"
     required: true
   python-version:
     description: "Python version which will install all dependencies and lint package(s)"
@@ -17,6 +17,26 @@ inputs:
   readme-path:
     description: "The path, relative to the root of the repo, of the README.md to update with the pylint badge"
     default: README.md
+    required: false
+  badge-text:
+    description: "Text to display in the badge"
+    default: PyLint
+    required: false
+  color-bad-score:
+    description: "Color of the badge for pylint scores < 5. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    default: red
+    required: false
+  color-ok-score:
+    description: "Color of the badge for pylint scores in range [5,8). Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    default: orange
+    required: false
+  color-good-score:
+    description: "Color of the badge for pylint scores in range [8,10). Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    default: yellow
+    required: false
+  color-perfect-score:
+    description: "Color of the badge for pylint scores == 10. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    default: brightgreen
     required: false
 
 runs:
@@ -48,20 +68,27 @@ runs:
     -
       name: "Lint package(s)"
       run: |
-        pkgs_pth=$(python3 -c 'import re; print(" ".join(re.findall("([^\s]+)", ${{ toJSON(inputs.package-path) }})))')
+        pkgs_pth=$(python3 -c 'import re; print(" ".join(re.findall("([^\s]+)", ${{ toJSON(inputs.lint-path) }})))')
         pylint --exit-zero --output-format=text:pylint_score.txt,colorized $pkgs_pth
       shell: bash
     -
       name: "Get numeric pylint score and badge color"
       id: parameters-badge
-      run: python ${{ github.action_path }}/get_score_color.py
+      run: |
+        python ${{ github.action_path }}/get_score_color.py \
+        ${{ inputs.color-bad-score }} \
+        ${{ inputs.color-ok-score }} \
+        ${{ inputs.color-good-score }} \
+        ${{ inputs.color-perfect-score }}
       shell: bash
     -
+      # $(echo ${{ inputs.badge-text }} | sed 's/ /%20/g') replaces spaces with %20
       name: "Create badge and substitute it in README.md"
       run: |
         python ${{ github.action_path }}/create_subs_badge.py \
         ${{ inputs.readme-path }} \
         ${{ steps.parameters-badge.outputs.pylint_score }} \
+        $(echo ${{ inputs.badge-text }} | sed 's/ /%20/g') \
         ${{ steps.parameters-badge.outputs.badge_color }}
       shell: bash
     -

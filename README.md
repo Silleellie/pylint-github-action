@@ -6,12 +6,16 @@ to your `README.md` that lets you display the obtained score!
 Each time the action is run, packages specified will be linted and a badge in the `README.md` is updated dynamically
 following one of the below rules:
 
-|      Range PyLint score       |                                                          Badge                                                          |
-|:-----------------------------:|:-----------------------------------------------------------------------------------------------------------------------:|
-|     *PyLint score* $< 5$      |  ![pylint-red](https://user-images.githubusercontent.com/26851363/220145659-833c833a-bad1-4251-a88f-75bee908ae40.svg)   |
-| $5 \le$ *PyLint score* $< 8$  | ![pylint-orange](https://user-images.githubusercontent.com/26851363/220145963-d4e252e6-c75f-4baf-82ed-b279aba27cfe.svg) |
-| $8 \le$ *PyLint score* $< 10$ | ![pylint-yellow](https://user-images.githubusercontent.com/26851363/220146291-f7537aa4-2125-4b5c-b020-3edb0b460e27.svg) |
-|     *PyLint score* $= 10$     | ![pylint-green](https://user-images.githubusercontent.com/26851363/220146426-b0250427-0854-402a-9ac8-abe6088a0fdb.svg)  |
+|              Range PyLint score               |                                                          Badge                                                          |
+|:---------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------:|
+|      **Bad score**: *PyLint score* $< 5$      |  ![pylint-red](https://user-images.githubusercontent.com/26851363/220145659-833c833a-bad1-4251-a88f-75bee908ae40.svg)   |
+|  **Ok score**: $5 \le$ *PyLint score* $< 8$   | ![pylint-orange](https://user-images.githubusercontent.com/26851363/220145963-d4e252e6-c75f-4baf-82ed-b279aba27cfe.svg) |
+| **Good score**: $8 \le$ *PyLint score* $< 10$ | ![pylint-yellow](https://user-images.githubusercontent.com/26851363/220146291-f7537aa4-2125-4b5c-b020-3edb0b460e27.svg) |
+|   **Perfect score**: *PyLint score* $= 10$    | ![pylint-green](https://user-images.githubusercontent.com/26851363/220146426-b0250427-0854-402a-9ac8-abe6088a0fdb.svg)  |
+
+
+**NEW:** You can now fully customize the badge color of each of the above ranges! Check [usage](#usage) 
+and [scenario](#scenario) sections for more!
 
 
 The action can be triggered by a **`Pull request`**, a **`Push`** or manually with **`workflow_dispatch`**. 
@@ -23,11 +27,17 @@ README.md with the pylint badge!
 
 A quick example on how you would typically use this *action* (more examples in [scenario section](#scenario))
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
-    package-path: src  # lint src package
+    lint-path: src  # lint src package
     python-version: 3.9  # python version which will lint the package
 ```
+
+And after running the action, the *GitHub action bot* will update your PyLint badge with a commit:
+
+<p align="center">
+    <img src="imgs/bot_commit.png" width="500"></img>
+</p>
 
 ## Preliminary steps
 
@@ -45,19 +55,20 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ## Usage
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
     
-    # Path of the package(s) to lint, relative to the repository root. 
-    # If more than one package should be linted, simply specify all of them 
+    # Path of the package(s) or python file(s) to lint, relative to the repository root. 
+    # If more than one package (or python file) should be linted, simply specify all of them 
     # with the multi-line notation like so:
-    # package-path: |
+    # lint-path: |
     #   src
     #   other_src
+    #   main.py
     #   ...
     # 
     # Required
-    package-path: src
+    lint-path: src
     
     # Version of the Python interpreter which will install all requirements of your project 
     # and lint the package(s) specified with the `package-path` argument
@@ -75,42 +86,110 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
     #
     # Optional, Default: README.md
     readme-path: README.md
+
+    # Text to display in the badge
+    #
+    # Optional, Default: PyLint
+    badge-text: PyLint
+
+    # Color of the badge for pylint scores < 5.
+    # Hex, rgb, rgba, hsl, hsla and css named colors can all be used
+    #
+    # Optional, Default: red
+    color-bad-score: red
+
+    # Color of the badge for pylint scores in range [5,8).
+    # Hex, rgb, rgba, hsl, hsla and css named colors can all be used
+    #
+    # Optional, Default: orange
+    color-ok-score: orange
+
+    # Color of the badge for pylint scores in range [8,10).
+    # Hex, rgb, rgba, hsl, hsla and css named colors can all be used
+    #
+    # Optional, Default: yellow
+    color-good-score: yellow
+
+    # Color of the badge for pylint scores == 10.
+    # Hex, rgb, rgba, hsl, hsla and css named colors can all be used
+    #
+    # Optional, Default: brightgreen
+    color-perfect-score: brightgreen
 ```
 
 ## Scenario
 
 * [Single package to lint](#single-package-to-lint)
+* [Single python file to lint](#single-python-file-to-lint)
 * [Multiple packages to lint](#multiple-packages-to-lint)
+* [Multiple python files to lint](#multiple-python-files-to-lint)
+* [Mix packages and python files to lint](#mix-packages-and-python-files-to-lint)
 * [Different path for requirements file](#different-path-for-requirements-file)
 * [Different path for README.md file](#different-path-for-readmemd-file)
+* [Change badge text](#change-badge-text)
+* [Change badge color with css named color](#change-badge-color-with-css-named-color)
+* [Change badge color with hex code](#change-badge-color-with-hex-code)
 
 ### Single package to lint
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
-    package-path: src
+    lint-path: src
+    python-version: 3.11
+```
+
+### Single python file to lint
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: main.py
     python-version: 3.11
 ```
 
 ### Multiple packages to lint
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
-    package-path: |
+    lint-path: |
       src
       app
       other_src/inner_src
     python-version: 3.11
 ```
 
+### Multiple python files to lint
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: |
+      file1.py
+      file2.py
+      other_src/file3.py
+    python-version: 3.11
+```
+
+### Mix packages and python files to lint
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: |
+      src
+      app
+      main.py
+    python-version: 3.11
+```
+
 ### Different path for requirements file
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
-    package-path: src
+    lint-path: src
     python-version: 3.11
     requirements-path: requirements/requirements-dev.txt
 ```
@@ -118,17 +197,56 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ### Different path for README.md file
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
-    package-path: src
+    lint-path: src
     python-version: 3.11
     readme-path: models/README.md
 ```
 
+### Change badge text
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: src
+    python-version: 3.11
+    badge-text: alternative text
+```
+
+### Change badge color with css named color
+
+In this case we are extending what we consider a perfect score: all scores in range $[8, 10]$ are considered
+good enough and will have same color (*brightgreen*)
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: src
+    python-version: 3.11
+    color-good-score: brightgreen
+    color-perfect-score: brightgreen
+```
+
+### Change badge color with hex code
+
+In this example we are changing the color for the *bad score range* ($[0,5)$) to purple (hex code: *800080*)
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: src
+    python-version: 3.11
+    color-bad-score: 800080
+```
+
+
 ## Credits
 
-This is a composite github action which uses the following godly working actions:
+This is a composite GitHub action which uses the following godly working actions:
 
 * [actions/checkout](https://github.com/actions/checkout)
 * [actions/setup-python](https://github.com/actions/setup-python)
 * [EndBug/add-and-commit](https://github.com/EndBug/add-and-commit)
+
+Massive thanks to [shields.io](https://shields.io/), which is used to create the badge!

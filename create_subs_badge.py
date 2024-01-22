@@ -4,7 +4,8 @@ import sys
 
 README_PATH = sys.argv[1]
 NUMERIC_SCORE = sys.argv[2]
-BADGE_COLOR = sys.argv[3]
+BADGE_TEXT = sys.argv[3]
+BADGE_COLOR = sys.argv[4]
 
 if not os.path.isfile(README_PATH):
     raise FileNotFoundError(f"README.md path is wrong, no file can be located at {README_PATH}")
@@ -12,7 +13,7 @@ if not os.path.isfile(README_PATH):
 with open(README_PATH, "r", encoding="utf8") as f:
     content = f.read()
 
-query = f"pylint-{NUMERIC_SCORE}-{BADGE_COLOR}?logo=python&logoColor=white"
+query = f"{BADGE_TEXT}-{NUMERIC_SCORE}-{BADGE_COLOR}?logo=python&logoColor=white"
 badge_url = f"https://img.shields.io/badge/{query}"
 
 patt = r"(?<=!\[pylint]\()(.*?)(?=\))"
