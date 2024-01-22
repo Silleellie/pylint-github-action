@@ -2,10 +2,10 @@ import re
 import os
 import sys
 
-COLOR_BAD_SCORE = sys.argv[1]
-COLOR_OK_SCORE = sys.argv[2]
-COLOR_GOOD_SCORE = sys.argv[3]
-COLOR_PERFECT_SCORE = sys.argv[4]
+COLOR_BAD_SCORE = str(sys.argv[1])
+COLOR_OK_SCORE = str(sys.argv[2])
+COLOR_GOOD_SCORE = str(sys.argv[3])
+COLOR_PERFECT_SCORE = str(sys.argv[4])
 
 with open("pylint_score.txt", "r") as f:
     pylint_result = f.read()
