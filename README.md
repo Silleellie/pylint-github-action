@@ -29,6 +29,12 @@ A quick example on how you would typically use this *action* (more examples in [
     python-version: 3.9  # python version which will lint the package
 ```
 
+And after running the action, the *GitHub action bot* will update your PyLint badge with a commit:
+
+<p align="center">
+    <img src="imgs/bot_commit.png" width="500"></img>
+</p>
+
 ## Preliminary steps
 
 To use this action you should perform two simple **first-time-only** operations:
