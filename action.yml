@@ -82,12 +82,13 @@ runs:
         ${{ inputs.color-perfect-score }}
       shell: bash
     -
+      # $(echo ${{ inputs.badge-text }} | sed 's/ /%20/g') replaces spaces with %20
       name: "Create badge and substitute it in README.md"
       run: |
         python ${{ github.action_path }}/create_subs_badge.py \
         ${{ inputs.readme-path }} \
         ${{ steps.parameters-badge.outputs.pylint_score }} \
-        ${{ inputs.badge-text }} \
+        $(echo ${{ inputs.badge-text }} | sed 's/ /%20/g') \
         ${{ steps.parameters-badge.outputs.badge_color }}
       shell: bash
     -
