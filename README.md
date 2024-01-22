@@ -23,9 +23,9 @@ README.md with the pylint badge!
 
 A quick example on how you would typically use this *action* (more examples in [scenario section](#scenario))
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
-    package-path: src  # lint src package
+    lint-path: src  # lint src package
     python-version: 3.9  # python version which will lint the package
 ```
 
@@ -45,19 +45,20 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ## Usage
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
     
-    # Path of the package(s) to lint, relative to the repository root. 
-    # If more than one package should be linted, simply specify all of them 
+    # Path of the package(s) or python file(s) to lint, relative to the repository root. 
+    # If more than one package (or python file) should be linted, simply specify all of them 
     # with the multi-line notation like so:
-    # package-path: |
+    # lint-path: |
     #   src
     #   other_src
+    #   main.py
     #   ...
     # 
     # Required
-    package-path: src
+    lint-path: src
     
     # Version of the Python interpreter which will install all requirements of your project 
     # and lint the package(s) specified with the `package-path` argument
@@ -80,37 +81,73 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ## Scenario
 
 * [Single package to lint](#single-package-to-lint)
+* [Single python file to lint](#single-python-file-to-lint)
 * [Multiple packages to lint](#multiple-packages-to-lint)
+* [Multiple python files to lint](#multiple-python-files-to-lint)
+* [Mix packages and python files to lint](#mix-packages-and-python-files-to-lint)
 * [Different path for requirements file](#different-path-for-requirements-file)
 * [Different path for README.md file](#different-path-for-readmemd-file)
 
 ### Single package to lint
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
-    package-path: src
+    lint-path: src
+    python-version: 3.11
+```
+
+### Single python file to lint
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: main.py
     python-version: 3.11
 ```
 
 ### Multiple packages to lint
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
-    package-path: |
+    lint-path: |
       src
       app
       other_src/inner_src
     python-version: 3.11
 ```
 
+### Multiple python files to lint
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: |
+      file1.py
+      file2.py
+      other_src/file3.py
+    python-version: 3.11
+```
+
+### Mix packages and python files to lint
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: |
+      src
+      app
+      main.py
+    python-version: 3.11
+```
+
 ### Different path for requirements file
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
-    package-path: src
+    lint-path: src
     python-version: 3.11
     requirements-path: requirements/requirements-dev.txt
 ```
@@ -118,17 +155,19 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ### Different path for README.md file
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v1
+- uses: Silleellie/pylint-github-action@v2
   with:
-    package-path: src
+    lint-path: src
     python-version: 3.11
     readme-path: models/README.md
 ```
 
 ## Credits
 
-This is a composite github action which uses the following godly working actions:
+This is a composite GitHub action which uses the following godly working actions:
 
 * [actions/checkout](https://github.com/actions/checkout)
 * [actions/setup-python](https://github.com/actions/setup-python)
 * [EndBug/add-and-commit](https://github.com/EndBug/add-and-commit)
+
+Massive thanks to [shields.io](https://shields.io/), which is used to create the badge!
