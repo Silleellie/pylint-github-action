@@ -87,6 +87,11 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
     # Optional, Default: README.md
     readme-path: README.md
 
+    # Text to display in the badge
+    #
+    # Optional, Default: PyLint
+    badge-text: PyLint
+
     # Color of the badge for pylint scores < 5.
     # Hex, rgb, rgba, hsl, hsla and css named colors can all be used
     #
@@ -121,6 +126,7 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 * [Mix packages and python files to lint](#mix-packages-and-python-files-to-lint)
 * [Different path for requirements file](#different-path-for-requirements-file)
 * [Different path for README.md file](#different-path-for-readmemd-file)
+* [Change badge text](#change-badge-text)
 * [Change badge color with css named color](#change-badge-color-with-css-named-color)
 * [Change badge color with hex code](#change-badge-color-with-hex-code)
 
@@ -196,6 +202,16 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
     lint-path: src
     python-version: 3.11
     readme-path: models/README.md
+```
+
+### Change badge text
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2
+  with:
+    lint-path: src
+    python-version: 3.11
+    badge-text: alternative text
 ```
 
 ### Change badge color with css named color
