@@ -18,6 +18,22 @@ inputs:
     description: "The path, relative to the root of the repo, of the README.md to update with the pylint badge"
     default: README.md
     required: false
+  color-bad-score:
+    description: "Color of the badge for pylint scores < 5. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    default: red
+    required: false
+  color-ok-score:
+    description: "Color of the badge for pylint scores in range [5,8). Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    default: orange
+    required: false
+  color-good-score:
+    description: "Color of the badge for pylint scores in range [8,10). Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    default: yellow
+    required: false
+  color-perfect-score:
+    description: "Color of the badge for pylint scores == 10. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    default: brightgreen
+    required: false
 
 runs:
   using: "composite"
@@ -54,7 +70,12 @@ runs:
     -
       name: "Get numeric pylint score and badge color"
       id: parameters-badge
-      run: python ${{ github.action_path }}/get_score_color.py
+      run: |
+        python ${{ github.action_path }}/get_score_color.py \
+        ${{ inputs.color-bad-score }} \
+        ${{ inputs.color-ok-score }} \
+        ${{ inputs.color-good-score }} \
+        ${{ inputs.color-perfect-score }}
       shell: bash
     -
       name: "Create badge and substitute it in README.md"
