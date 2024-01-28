@@ -1,9 +1,9 @@
 # PyLint with badge - GitHub Action
 
-GitHub action that lets you *easily* lint **one** or **multiple** packages of your project and adds a **dynamic badge**
+GitHub action that lets you *easily* lint **one** or **multiple** packages (or python files) of your project and adds a **dynamic badge**
 to your `README.md` that lets you display the obtained score!
 
-Each time the action is run, packages specified will be linted and a badge in the `README.md` is updated dynamically
+Each time the action is run, packages (or python files) specified will be linted and a badge in the `README.md` is updated dynamically
 following one of the below rules:
 
 |              Range PyLint score               |                                                           Badge                                                           |
@@ -72,7 +72,7 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
     lint-path: src
     
     # Version of the Python interpreter which will install all requirements of your project 
-    # and lint the package(s) specified with the `package-path` argument
+    # and lint the package(s) or python file(s) specified with the `lint-path` argument
     #
     # Required
     python-version: 3.9
