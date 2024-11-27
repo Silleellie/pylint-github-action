@@ -231,7 +231,7 @@ good enough and will have same color (*brightgreen*)
 
 ### Change badge color with hex code
 
-In this example we are changing the color for the *bad score range* ($[0,5)$) to purple (hex code: *800080*)
+In this example we are changing the color for the *bad score range* ( $[0, 5)$ ) to purple (hex code: *800080*)
 
 ```yaml
 - uses: Silleellie/pylint-github-action@v2
