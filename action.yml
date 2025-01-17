@@ -18,6 +18,10 @@ inputs:
     description: "The path, relative to the root of the repo, of the README.md to update with the pylint badge"
     default: README.md
     required: false
+  pylintrc-path:
+    description: "The path, relative to the root of the repo, of the .pylintrc file containing custom lint rules to use"
+    default: ''
+    required: false
   badge-text:
     description: "Text to display in the badge"
     default: PyLint
@@ -69,7 +73,7 @@ runs:
       name: "Lint package(s)"
       run: |
         pkgs_pth=$(python3 -c 'import re; print(" ".join(re.findall("([^\s]+)", ${{ toJSON(inputs.lint-path) }})))')
-        pylint --exit-zero --output-format=text:pylint_score.txt,colorized $pkgs_pth
+        pylint --exit-zero --rcfile=${{ inputs.pylintrc-path  }} --output-format=text:pylint_score.txt,colorized $pkgs_pth
       shell: bash
     -
       name: "Get numeric pylint score and badge color"
