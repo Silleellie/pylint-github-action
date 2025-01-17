@@ -73,7 +73,7 @@ runs:
       name: "Lint package(s)"
       run: |
         pkgs_pth=$(python3 -c 'import re; print(" ".join(re.findall("([^\s]+)", ${{ toJSON(inputs.lint-path) }})))')
-        pylint --exit-zero --rcfile={{ inputs.pylintrc-path  }} --output-format=text:pylint_score.txt,colorized $pkgs_pth
+        pylint --exit-zero --rcfile=${{ inputs.pylintrc-path  }} --output-format=text:pylint_score.txt,colorized $pkgs_pth
       shell: bash
     -
       name: "Get numeric pylint score and badge color"
