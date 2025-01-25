@@ -121,6 +121,11 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
     #
     # Optional, Default: brightgreen
     color-perfect-score: brightgreen
+
+    # Message for the commit that updates pylint badge
+    #
+    # Optional, Default: 'Updated pylint badge'
+    commit-message: 'Updated pylint badge'
 ```
 
 ## Scenario
@@ -136,6 +141,7 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 * [Change badge text](#change-badge-text)
 * [Change badge color with css named color](#change-badge-color-with-css-named-color)
 * [Change badge color with hex code](#change-badge-color-with-hex-code)
+* [Provide custom commit message](#provide-custom-commit-message)
 
 ### Single package to lint
 
@@ -261,6 +267,17 @@ In this example we are changing the color for the *bad score range* ( $[0, 5)$ )
     color-bad-score: 800080
 ```
 
+### Provide custom commit message
+
+You can customize the message of the commit being pushed by this action on pylint badge update in your README
+
+```yaml
+- uses: Silleellie/pylint-github-action@v2.1
+  with:
+    lint-path: src
+    python-version: 3.11
+    commit-message: 'feat(): update pylint badge'
+```
 
 ## Credits
 

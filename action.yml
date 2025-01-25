@@ -42,6 +42,10 @@ inputs:
     description: "Color of the badge for pylint scores == 10. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
     default: brightgreen
     required: false
+  commit-message:
+    description: "Message for the commit that updates pylint badge"
+    default: 'Updated pylint badge'
+    required: false
 
 runs:
   using: "composite"
@@ -101,5 +105,5 @@ runs:
       with:
         add: 'README.md'
         default_author: github_actions
-        message: 'Updated pylint badge'
+        message: ${{ inputs.commit-message }}
         push: 'true'
