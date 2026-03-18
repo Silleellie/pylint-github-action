@@ -113,3 +113,4 @@ runs:
         git commit -m "Updated pylint badge"
     
         git push origin HEAD:${{ github.ref_name }}
+      shell: bash
