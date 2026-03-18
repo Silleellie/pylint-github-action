@@ -42,10 +42,6 @@ inputs:
     description: "Color of the badge for pylint scores == 10. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
     default: brightgreen
     required: false
-  github-server-url:
-      description: "Base URL of the GitHub instance (e.g., https://github.com or https://github.my_company.com)"
-      required: false
-      default: "https://github.com"
 
 permissions:
   contents: write
