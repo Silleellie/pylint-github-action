@@ -276,7 +276,7 @@ You can customize the message of the commit being pushed by this action on pylin
   with:
     lint-path: src
     python-version: 3.11
-    commit-message: 'feat(): update pylint badge'
+    commit-message: 'Custom commit message!'
 ```
 
 ## Credits
