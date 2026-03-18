@@ -49,17 +49,17 @@ runs:
   steps:
     -
       name: "Checkout Repository - PR"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       if: github.event_name == 'pull_request'
       with:
         ref: ${{ github.event.pull_request.head.ref }}
     -
       name: "Checkout Repository - PUSH"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       if: github.event_name != 'pull_request'
     -
       name: "Setup python"
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ inputs.python-version }}
     -
