@@ -268,6 +268,5 @@ This is a composite GitHub action which uses the following godly working actions
 
 * [actions/checkout](https://github.com/actions/checkout)
 * [actions/setup-python](https://github.com/actions/setup-python)
-* [EndBug/add-and-commit](https://github.com/EndBug/add-and-commit)
 
 Massive thanks to [shields.io](https://shields.io/), which is used to create the badge!
