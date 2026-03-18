@@ -104,7 +104,7 @@ runs:
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
     
-        git add {{ inputs.readme-path  }}
+        git add ${{ inputs.readme-path  }}
     
         git commit -m "Updated pylint badge"
     
