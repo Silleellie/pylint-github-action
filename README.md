@@ -26,7 +26,7 @@ README.md with the pylint badge!
 
 A quick example on how you would typically use this *action* (more examples in [scenario section](#scenario))
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: src  # lint src package
     python-version: 3.11  # python version which will lint the package
@@ -55,7 +55,7 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ## Usage
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     
     # Path of the package(s) or python file(s) to lint, relative to the repository root. 
@@ -146,7 +146,7 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ### Single package to lint
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: src
     python-version: 3.11
@@ -155,7 +155,7 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ### Single python file to lint
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: main.py
     python-version: 3.11
@@ -164,7 +164,7 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ### Multiple packages to lint
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: |
       src
@@ -176,7 +176,7 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ### Multiple python files to lint
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: |
       file1.py
@@ -188,7 +188,7 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ### Mix packages and python files to lint
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: |
       src
@@ -200,7 +200,7 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ### Different path for requirements file
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: src
     python-version: 3.11
@@ -210,7 +210,7 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ### Different path for README.md file
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: src
     python-version: 3.11
@@ -224,7 +224,7 @@ one downloading it from [here](https://github.com/pylint-dev/pylint/blob/main/py
 `pylint --generate-rcfile > .pylintrc` in your repository root
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: src
     python-version: 3.11
@@ -234,7 +234,7 @@ one downloading it from [here](https://github.com/pylint-dev/pylint/blob/main/py
 ### Change badge text
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: src
     python-version: 3.11
@@ -247,7 +247,7 @@ In this case we are extending what we consider a perfect score: all scores in ra
 good enough and will have same color (*brightgreen*)
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: src
     python-version: 3.11
@@ -260,7 +260,7 @@ good enough and will have same color (*brightgreen*)
 In this example we are changing the color for the *bad score range* ( $[0, 5)$ ) to purple (hex code: *800080*)
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: src
     python-version: 3.11
@@ -272,7 +272,7 @@ In this example we are changing the color for the *bad score range* ( $[0, 5)$ )
 You can customize the message of the commit being pushed by this action on pylint badge update in your README
 
 ```yaml
-- uses: Silleellie/pylint-github-action@v2.1
+- uses: Silleellie/pylint-github-action@v3
   with:
     lint-path: src
     python-version: 3.11
