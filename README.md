@@ -220,8 +220,8 @@ You can change it in `Settings > Actions > General`, then go to subsection **Wor
 ### Specify custom .pylintrc filepath
 
 With this parameter, you can easily adopt your custom lint rules when running this action! Start from the standard
-one downloading it from [here](https://github.com/pylint-dev/pylint/blob/main/pylintrc) or by generating it
-in on your own by running `pylint --generate-rcfile > .pylintrc` in your repository root
+one downloading it from [here](https://github.com/pylint-dev/pylint/blob/main/pylintrc) or by generating it on your own by running 
+`pylint --generate-rcfile > .pylintrc` in your repository root
 
 ```yaml
 - uses: Silleellie/pylint-github-action@v2.1
@@ -285,6 +285,5 @@ This is a composite GitHub action which uses the following godly working actions
 
 * [actions/checkout](https://github.com/actions/checkout)
 * [actions/setup-python](https://github.com/actions/setup-python)
-* [EndBug/add-and-commit](https://github.com/EndBug/add-and-commit)
 
 Massive thanks to [shields.io](https://shields.io/), which is used to create the badge!
