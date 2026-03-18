@@ -103,10 +103,14 @@ runs:
       run: |
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
+        
+        if git diff --quiet README.md; then
+          echo "No changes"
+          exit 0
+        fi
     
         git add ${{ inputs.readme-path }}
-    
         git commit -m "Updated pylint badge"
-    
         git push origin HEAD:${{ github.ref_name }}
+
       shell: bash
