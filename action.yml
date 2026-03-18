@@ -105,7 +105,7 @@ runs:
         git config user.email "github-actions@github.com"
         
         if git diff --quiet README.md; then
-          echo "No changes"
+          echo "No changes detected, the badge does not need to be updated!"
           exit 0
         fi
     
