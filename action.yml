@@ -42,6 +42,10 @@ inputs:
     description: "Color of the badge for pylint scores == 10. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
     default: brightgreen
     required: false
+  commit-message:
+    description: "Message for the commit that updates pylint badge"
+    default: 'Updated pylint badge'
+    required: false
 
 permissions:
   contents: write
@@ -110,6 +114,6 @@ runs:
         fi
     
         git add ${{ inputs.readme-path }}
-        git commit -m "Updated pylint badge"
+        git commit -m "${{ inputs.commit-message }}"
         git push origin HEAD:${{ github.ref_name }}
       shell: bash
